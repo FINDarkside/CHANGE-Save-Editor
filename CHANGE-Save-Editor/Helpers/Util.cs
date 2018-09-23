@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CHANGE_Save_Editor.Util
+namespace CHANGE_Save_Editor.Helpers
 {
     public static class Util
     {

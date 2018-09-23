@@ -1,23 +1,14 @@
 ﻿using CHANGE_Save_Editor.GameData;
-using CHANGE_Save_Editor.Util;
+using CHANGE_Save_Editor.Helpers;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 
 namespace CHANGE_Save_Editor
 {
-    public class GameSaveManager
+    public static class RegistrySaveManager
     {
-        private string savePath;
 
-        private Dictionary<string, string> registryKeys = new Dictionary<string, string>();
-
-        public GameSaveManager(string savePath)
-        {
-            this.savePath = savePath;
-        }
-
-        public GameSave LoadActiveSave()
+        public static GameSave Load()
         {
             GameSave save = new GameSave();
             save.Inventory = new Inventory();
@@ -47,8 +38,8 @@ namespace CHANGE_Save_Editor
                             var val = rk.GetValue(key);
                             save.SetValue(keyName.ToLower(), val);
                         }
-                        registryKeys.Add(keyName.ToLower(), key);
-              
+                        RegistryKeyMapper.EnsureKey(key);
+
                     }
                 }
             }
@@ -59,8 +50,6 @@ namespace CHANGE_Save_Editor
             }
 
             return save;
-
         }
-
     }
 }

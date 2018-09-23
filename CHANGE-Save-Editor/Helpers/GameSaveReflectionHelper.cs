@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace CHANGE_Save_Editor.Util
+namespace CHANGE_Save_Editor.Helpers
 {
     static class GameSaveReflectionHelper
     {

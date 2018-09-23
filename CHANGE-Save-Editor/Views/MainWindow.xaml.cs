@@ -11,7 +11,7 @@ namespace CHANGE_Save_Editor
         {
             InitializeComponent();
             var asd = new GameSaveManager("zd");
-            asd.LoadActiveSave();
+            RegistrySaveManager.Load();
         }
     }
 }

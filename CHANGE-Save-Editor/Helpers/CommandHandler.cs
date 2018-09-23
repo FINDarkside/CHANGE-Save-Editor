@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CHANGE_Save_Editor.Util
+namespace CHANGE_Save_Editor.Helpers
 {
     public class CommandHandler : ICommand
     {

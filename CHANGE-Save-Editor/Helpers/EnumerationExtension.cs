@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Markup;
 
-namespace CHANGE_Save_Editor.Util
+namespace CHANGE_Save_Editor.Helpers
 {
     public class EnumerationExtension : MarkupExtension
     {

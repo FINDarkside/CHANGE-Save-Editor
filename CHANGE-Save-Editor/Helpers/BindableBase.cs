@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CHANGE_Save_Editor.Util
+namespace CHANGE_Save_Editor.Helpers
 {
     public abstract class BindableBase : INotifyPropertyChanged
     {
