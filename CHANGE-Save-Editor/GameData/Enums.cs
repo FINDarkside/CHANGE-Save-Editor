@@ -1,0 +1,76 @@
+﻿namespace CHANGE_Save_Editor.GameData
+{
+    public enum ItemType
+    {
+        TRASH,
+        SANDWICH,
+        SAUSAGEROLL,
+        FRUIT,
+        CRISPS,
+        DOGFOOD,
+        BEER,
+        MEALDEAL,
+        DEODORANT,
+        CIGARETTES,
+        NEWCLOTHES,
+        SLEEPINGBAG,
+        GUITAR,
+        PAPERS,
+        COFFEE,
+        CHOCOLATE,
+        HOTDOG,
+        SCRATCHCARD,
+        NEWSHOES,
+        WINTERCOAT,
+        SANITIZER,
+        HAT,
+        GLOVES,
+        PILLS,
+        BIGGERBAG,
+        TIE,
+        TEXTBOOK,
+        READINGGLASSES,
+        GUITARPICK,
+        BUSPASS,
+        CUP,
+        SOAP,
+        TENT,
+    }
+
+    public enum JobType
+    {
+        UNKNOWN = 0,
+        BIG_ISSUE = 1,
+        CONSTRUCTION = 2,
+        SHOP_ASSISTANT = 3,
+        CAFE = 4,
+    }
+
+    public enum Perk
+    {
+        DOG,
+        LOVE,
+        STREETSAVVY,
+        SURVIVOR,
+        EXPLORER,
+        TRAVELLER,
+        WORKETHICS,
+        EMPLOYEE,
+        EXPERIENCED,
+        PRO,
+        SHELTERED,
+        SHELTER_REG,
+        BEGGAR,
+        M_BEGGAR,
+        STRONG_STOMACH,
+        FORAGER,
+        HEALTHY,
+        CIG_ADDICT,
+        ALC_ADDICT,
+        CHARISMA,
+        CHARM,
+        AMATEUR,
+        PERFORMER,
+        HOME,
+    }
+}

@@ -66,6 +66,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameData\Enums.cs" />
+    <Compile Include="GameData\GameSave.cs" />
+    <Compile Include="GameData\GameSaveManager.cs" />
+    <Compile Include="GameData\Inventory.cs" />
+    <Compile Include="Util\BindableBase.cs" />
+    <Compile Include="Util\CommandHandler.cs" />
+    <Compile Include="Util\EnumerationExtension.cs" />
+    <Compile Include="Util\GameSaveReflectionHelper.cs" />
+    <Compile Include="Util\Util.cs" />
     <Page Include="Colors\ChangeAccent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
