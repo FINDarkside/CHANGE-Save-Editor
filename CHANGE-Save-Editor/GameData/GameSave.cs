@@ -31,7 +31,7 @@ namespace CHANGE_Save_Editor
         public bool SaveExists { get; set; }
         public int ShelterUseCount { get; set; }
         public float StudyLevel { get; set; }
-        //public int Seed { get; set; }
+        public int Seed { get; set; }
         public float TrashCount { get; set; }
         public int TrashUseCount { get; set; }
         public float WorldPosition { get; set; }
@@ -42,5 +42,8 @@ namespace CHANGE_Save_Editor
         public bool HasJob { get; set; }
         public Dictionary<Perk, bool> Perks { get; set; }
         public JobType JobType { get; set; }
+
+        // We need to save the unknown values too to not lose any data
+        public Dictionary<string, object> Other { get; set; }
     }
 }

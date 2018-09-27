@@ -19,13 +19,13 @@ namespace CHANGE_Save_Editor.Helpers
             }
         }
 
-        public static void SetValue(this GameSave instance, string name, object val)
+        public static bool SetValue(this GameSave instance, string name, object val)
         {
             if (!properties.ContainsKey(name) || val.GetType() == typeof(byte[]))
             {
                 Debug.WriteLine("Skipped " + name);
                 // TODO: How to handle?
-                return;
+                return false;
             }
 
             PropertyInfo prop = properties[name];
@@ -51,6 +51,8 @@ namespace CHANGE_Save_Editor.Helpers
             {
                 throw new Exception("Unexpected target type: " + targetType.ToString());
             }
+
+            return true;
         }
     }
 

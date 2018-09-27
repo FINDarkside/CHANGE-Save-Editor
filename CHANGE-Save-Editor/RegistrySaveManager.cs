@@ -2,6 +2,7 @@
 using CHANGE_Save_Editor.Helpers;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 
 namespace CHANGE_Save_Editor
 {
@@ -11,7 +12,9 @@ namespace CHANGE_Save_Editor
         public static GameSave Load()
         {
             GameSave save = new GameSave();
+            save.Other = new Dictionary<string, object>();
             save.Inventory = new Inventory();
+
             try
             {
                 using (RegistryKey rk = Registry.CurrentUser.OpenSubKey("Software\\Delve Interactive\\CHANGE"))
@@ -36,10 +39,11 @@ namespace CHANGE_Save_Editor
                         else
                         {
                             var val = rk.GetValue(key);
-                            save.SetValue(keyName.ToLower(), val);
+                            bool valueSet = save.SetValue(keyName.ToLower(), val);
+                            if (!valueSet)
+                                save.Other.Add(key, val);
                         }
                         RegistryKeyMapper.EnsureKey(key);
-
                     }
                 }
             }
