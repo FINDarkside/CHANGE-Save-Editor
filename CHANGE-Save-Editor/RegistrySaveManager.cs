@@ -14,6 +14,7 @@ namespace CHANGE_Save_Editor
             GameSave save = new GameSave();
             save.Other = new Dictionary<string, object>();
             save.Inventory = new Inventory();
+            save.Perks = new Dictionary<Perk, bool>();
 
             try
             {
@@ -29,9 +30,9 @@ namespace CHANGE_Save_Editor
                             int amount = Convert.ToInt32(rk.GetValue(key));
                             save.Inventory.CreateItem(keyName, amount);
                         }
-                        else if (keyName.StartsWith("PERKS"))
+                        else if (keyName.StartsWith("PERK"))
                         {
-                            int n = int.Parse(keyName.Substring(5));
+                            int n = int.Parse(keyName.Substring(4));
                             Perk perk = (Perk)n;
                             bool val = Convert.ToBoolean(rk.GetValue(key));
                             save.Perks.Add(perk, val);
