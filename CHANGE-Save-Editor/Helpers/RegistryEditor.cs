@@ -69,7 +69,6 @@ namespace CHANGE_Save_Editor.Helpers
             if (hKey == UIntPtr.Zero)
                 return;
             int errCode = RegCloseKey(hKey);
-            System.Diagnostics.Debug.WriteLine("CLOSING");
             if (errCode != 0)
                 throw new Exception("Failed to close registry key.");
         }
