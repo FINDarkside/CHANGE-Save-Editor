@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:CHANGE_Save_Editor.Properties"
         xmlns:local="clr-namespace:CHANGE_Save_Editor"
+        xmlns:tabs="clr-namespace:CHANGE_Save_Editor.Views.Tabs"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,7 +16,36 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-    </Grid>
+        Title="{x:Static p:Resources.Title}" Height="450" Width="800">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Height="40" Grid.Column="0">
+                <ComboBox Margin="10 0 0 0" Name="ccSaves" ItemsSource="{Binding Saves}" DisplayMemberPath="Description" SelectedValuePath="Value" Width="220" SelectedIndex="0"/>
+                <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignFlatButtonNoRounding}" Content="Save" Height="40"/>
+                <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignFlatButtonNoRounding}" Content="Refresh" Height="40"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0 0 0 0">
+                <Button Style="{StaticResource MaterialDesignFlatButtonNoRounding}" Foreground="#7289DA" Height="40">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Discord" />
+                        <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" Localization.Comments = "$Content (Trademark)">Discord group</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Rectangle DockPanel.Dock="Top" Fill="#A6B8C3" Height="1" ></Rectangle>
+        <dragablz:TabablzControl Name="tabPanel"  DockPanel.Dock="Bottom" FixedHeaderCount="2">
+            <TabItem Header="ABOUT" >
+                <StackPanel>
+                    <Rectangle Fill="#A6B8C3" Height="1" />
+                    <tabs:AboutTab/>
+                </StackPanel>
+            </TabItem>
+
+        </dragablz:TabablzControl>
+    </DockPanel>
 </Window>
