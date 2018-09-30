@@ -9,7 +9,7 @@ namespace CHANGE_Save_Editor.Helpers
 {
     public static class RegistryKeyMapper
     {
-        public static Dictionary<string, string> registryKeys = new Dictionary<string, string>();
+        private static Dictionary<string, string> registryKeys = new Dictionary<string, string>();
 
         static RegistryKeyMapper()
         {
@@ -118,6 +118,13 @@ namespace CHANGE_Save_Editor.Helpers
             registryKeys.Add("perk21", "PERK21_h3329991370");
             registryKeys.Add("perk22", "PERK22_h3329991369");
             registryKeys.Add("perk23", "PERK23_h3329991368");
+        }
+
+        public static string GetKey(string s)
+        {
+            if (registryKeys.TryGetValue(s, out string key))
+                return key;
+            throw new Exception("Unknown key " + s);
         }
 
         public static void EnsureKey(string key)

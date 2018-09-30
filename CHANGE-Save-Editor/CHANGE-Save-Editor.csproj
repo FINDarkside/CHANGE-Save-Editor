@@ -70,6 +70,9 @@
     <Compile Include="GameData\GameSave.cs" />
     <Compile Include="GameSaveManager.cs" />
     <Compile Include="GameData\Inventory.cs" />
+    <Compile Include="Helpers\LinqExtensions.cs" />
+    <Compile Include="Helpers\MemoryAllocator.cs" />
+    <Compile Include="Helpers\RegistryEditor.cs" />
     <Compile Include="Helpers\RegistryKeyMapper.cs" />
     <Compile Include="RegistrySaveManager.cs" />
     <Compile Include="Helpers\BindableBase.cs" />

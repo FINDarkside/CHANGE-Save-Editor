@@ -19,6 +19,33 @@ namespace CHANGE_Save_Editor.Helpers
             }
         }
 
+        public static List<KeyValuePair<string, object>> GetValues(this GameSave instance)
+        {
+            var result = new List<KeyValuePair<string, object>>();
+            foreach (var kvp in properties)
+            {
+                var type = kvp.Value.PropertyType;
+                object val = kvp.Value.GetValue(instance);
+                if (type == typeof(float))
+                {
+                    val = Convert.ToDouble(val);
+                    result.Add(new KeyValuePair<string, object>(kvp.Key, val));
+                }
+                else if (type == typeof(bool))
+                {
+                    val = (bool)val ? 1 : 0;
+                    result.Add(new KeyValuePair<string, object>(kvp.Key, val));
+                }
+                else if (type.IsEnum)
+                {
+                    val = (int)val;
+                    result.Add(new KeyValuePair<string, object>(kvp.Key, val));
+                }
+
+            }
+            return result;
+        }
+
         public static bool SetValue(this GameSave instance, string name, object val)
         {
             if (!properties.ContainsKey(name) || val.GetType() == typeof(byte[]))
@@ -41,7 +68,7 @@ namespace CHANGE_Save_Editor.Helpers
             }
             else if (targetType == typeof(int))
             {
-                prop.SetValue(instance, Convert.ToInt32(val));
+                prop.SetValue(instance, (int)val);
             }
             else if (targetType == typeof(bool))
             {

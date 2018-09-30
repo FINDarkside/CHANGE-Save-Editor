@@ -5,21 +5,21 @@ namespace CHANGE_Save_Editor.GameData
     public class Inventory
     {
 
-        public List<Item> items { get; set; }
+        public List<Item> Items { get; set; }
 
         public Inventory()
         {
-            this.items = new List<Item>();
+            this.Items = new List<Item>();
         }
 
         public void CreateItem(string name, int amount)
         {
-            items.Add(new Item(name, amount));
+            Items.Add(new Item(name, amount));
         }
 
         public Item GetByName(string name)
         {
-            return items.Find(item => item.name == name);
+            return Items.Find(item => item.name == name);
         }
 
         public void SetAmount(string name, int amount)

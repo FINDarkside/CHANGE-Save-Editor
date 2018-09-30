@@ -27,7 +27,7 @@ namespace CHANGE_Save_Editor
         public bool IsSick { get; set; }
         public Inventory Inventory { get; set; }
         public int PoliceWarningCount { get; set; }
-        public float Position { get; set; }
+        public float SavedPosition { get; set; }
         public bool SaveExists { get; set; }
         public int ShelterUseCount { get; set; }
         public float StudyLevel { get; set; }
@@ -39,11 +39,11 @@ namespace CHANGE_Save_Editor
         public bool IsWinter { get; set; }
         public bool HasGuitar { get; set; }
         public bool HasNewClothes { get; set; }
-        public bool HasJob { get; set; }
+        //public bool HasJob { get; set; }
         public Dictionary<Perk, bool> Perks { get; set; }
         public JobType JobType { get; set; }
 
         // We need to save the unknown values too to not lose any data
-        public Dictionary<string, object> Other { get; set; }
+        public Dictionary<string, object> Unknown { get; set; }
     }
 }

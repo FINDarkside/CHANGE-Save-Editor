@@ -9,10 +9,35 @@ namespace CHANGE_Save_Editor
     public static class RegistrySaveManager
     {
 
+        public static void Save(GameSave save)
+        {
+            //ClearSave();
+            var values = save.GetValues();
+            using (var re = new RegistryEditor("Software\\Delve Interactive\\CHANGE"))
+            {
+                foreach (var kvp in values)
+                {
+                    var key = RegistryKeyMapper.GetKey(kvp.Key);
+                    re.SetValue(key, kvp.Value);
+                }
+                save.Unknown.ForEach(item => re.SetValue(item.Key, item.Value));
+                foreach (var kvp in save.Perks)
+                {
+                    var key = RegistryKeyMapper.GetKey("perk_" + kvp.Key.ToString());
+                    re.SetValue(key, kvp.Value ? 1 : 0);
+                }
+                foreach (var item in save.Inventory.Items)
+                {
+                    var key = RegistryKeyMapper.GetKey("item_" + item.name);
+                    re.SetValue(key, item.amount);
+                }
+            }
+        }
+
         public static GameSave Load()
         {
             GameSave save = new GameSave();
-            save.Other = new Dictionary<string, object>();
+            save.Unknown = new Dictionary<string, object>();
             save.Inventory = new Inventory();
             save.Perks = new Dictionary<Perk, bool>();
 
@@ -24,25 +49,36 @@ namespace CHANGE_Save_Editor
                     foreach (string key in keys)
                     {
                         string keyName = key.Contains("_") ? key.Substring(0, key.LastIndexOf("_")) : key;
+                        keyName = keyName.ToLower();
 
-                        if (keyName.StartsWith("ITEM"))
+                        if (keyName.StartsWith("item_"))
                         {
                             int amount = Convert.ToInt32(rk.GetValue(key));
-                            save.Inventory.CreateItem(keyName, amount);
+                            string name = keyName.Substring(4, keyName.Length - 4);
+                            name = name[0].ToString().ToUpper() + name.Substring(1);
+                            save.Inventory.CreateItem(name, amount);
                         }
-                        else if (keyName.StartsWith("PERK"))
+                        else if (keyName.StartsWith("perk_"))
                         {
                             int n = int.Parse(keyName.Substring(4));
-                            Perk perk = (Perk)n;
-                            bool val = Convert.ToBoolean(rk.GetValue(key));
-                            save.Perks.Add(perk, val);
+                            if (n >= Enum.GetValues(typeof(Perk)).Length)
+                            {
+                                save.Unknown.Add(key, rk.GetValue(key));
+                            }
+                            else
+                            {
+                                Perk perk = (Perk)n;
+                                bool val = Convert.ToBoolean(rk.GetValue(key));
+                                save.Perks.Add(perk, val);
+                            }
+
                         }
                         else
                         {
                             var val = rk.GetValue(key);
-                            bool valueSet = save.SetValue(keyName.ToLower(), val);
+                            bool valueSet = save.SetValue(keyName, val);
                             if (!valueSet)
-                                save.Other.Add(key, val);
+                                save.Unknown.Add(key, val);
                         }
                         RegistryKeyMapper.EnsureKey(key);
                     }
@@ -55,6 +91,14 @@ namespace CHANGE_Save_Editor
             }
 
             return save;
+        }
+
+        public static void ClearSave()
+        {
+            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey("Software\\Delve Interactive\\CHANGE", true))
+            {
+                rk.GetValueNames().ForEach(name => rk.DeleteValue(name));
+            }
         }
     }
 }
